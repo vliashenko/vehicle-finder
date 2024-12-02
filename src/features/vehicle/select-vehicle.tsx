@@ -28,22 +28,27 @@ export default function SelectVehicleForm({
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className='flex flex-row items-center justify-center gap-5'>
+    <form
+      onSubmit={handleSubmit}
+      className='flex w-screen flex-wrap items-center justify-center gap-2 px-10'
+    >
+      <div className='w-[120px]'>
         <Select
           options={makerOptions}
           label='maker'
           value={selectedMaker}
           setValue={setSelectedMaker}
         />
+      </div>
+      <div className='w-[120px]'>
         <Select
           options={yearOptions}
           label='year'
           value={selectedYear}
           setValue={setSelectedYear}
         />
-        <Button onClick={() => handleSubmit} disabled={disabled} type='submit' title='Search' />
-      </form>
-    </div>
+      </div>
+      <Button onClick={() => handleSubmit} disabled={disabled} type='submit' title='Search' />
+    </form>
   );
 }
