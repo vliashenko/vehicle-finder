@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import mainLogo from '../../public/logo.png';
 import Link from 'next/link';
+import Select from '@/shared/ui/select';
 
 export default function Home() {
   return (
@@ -31,10 +32,14 @@ export default function Home() {
         </nav>
       </header>
       <main>
-        <div className='flex h-[calc(100vh-101px)] items-center justify-center px-10'>
-          <p className='text-center font-mono text-4xl font-semibold'>
+        <div className='flex h-[calc(100vh-101px)] flex-col items-center justify-center px-10'>
+          <p className='mb-5 text-center font-mono text-4xl font-semibold'>
             Find your ideal car effortlessly with our comprehensive app 🚗✨
           </p>
+          <div className='flex flex-row items-center gap-5'>
+            <Select />
+            <Select />
+          </div>
         </div>
       </main>
       <footer className='border-t border-gray-200 bg-white px-4 py-2.5'>
