@@ -5,10 +5,12 @@ import Select from '@/shared/ui/select';
 import { useRouter } from 'next/navigation';
 import { SyntheticEvent, useMemo, useState } from 'react';
 
-export default function SelectVehicleMaker({
-  options,
+export default function SelectVehicleForm({
+  makerOptions,
+  yearOptions,
 }: {
-  options: { id: string; title: string }[];
+  makerOptions: { id: string; title: string }[];
+  yearOptions: { id: string; title: string }[];
 }) {
   const router = useRouter();
 
@@ -28,8 +30,18 @@ export default function SelectVehicleMaker({
   return (
     <div>
       <form onSubmit={handleSubmit} className='flex flex-row items-center justify-center gap-5'>
-        <Select options={options} label='maker' value={selectedMaker} setValue={setSelectedMaker} />
-        <Select options={options} label='year' value={selectedYear} setValue={setSelectedYear} />
+        <Select
+          options={makerOptions}
+          label='maker'
+          value={selectedMaker}
+          setValue={setSelectedMaker}
+        />
+        <Select
+          options={yearOptions}
+          label='year'
+          value={selectedYear}
+          setValue={setSelectedYear}
+        />
         <Button onClick={() => handleSubmit} disabled={disabled} type='submit' title='Search' />
       </form>
     </div>

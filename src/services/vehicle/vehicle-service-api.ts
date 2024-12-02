@@ -27,8 +27,8 @@ const buildVehicleMakers = (res: VehicleMaker[]) => {
   }, []);
 };
 
-export async function getVehicleMakeYears(): Promise<string[]> {
-  return Promise.resolve(makeYears);
+export async function getVehicleMakeYears(): Promise<{ title: string; id: string }[]> {
+  return (await Promise.resolve(makeYears)).map((year, i) => ({ title: year, id: String(i) }));
 }
 
 export async function getVehicleMakers(): Promise<VehicleMaker[]> {

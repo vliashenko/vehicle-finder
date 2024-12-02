@@ -2,14 +2,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { VehicleApiService } from '@/services/vehicle';
-import SelectVehicleMaker from '@/features/vehicle/select-vehicle';
+import SelectVehicleForm from '@/features/vehicle/select-vehicle';
 
 import mainLogo from '../../public/logo.png';
 
 export default async function Home() {
   const makers = await VehicleApiService.getVehicleMakers();
+  const years = await VehicleApiService.getVehicleMakeYears();
 
-  const buildedOptions = makers.map((maker) => ({
+  const makerOptions = makers.map((maker) => ({
     id: String(maker.MakeId),
     title: maker.MakeName,
   }));
@@ -46,7 +47,12 @@ export default async function Home() {
           <p className='mb-5 text-center font-mono text-4xl font-semibold'>
             Find your ideal car effortlessly with our comprehensive app 🚗✨
           </p>
-          <SelectVehicleMaker options={buildedOptions} />
+          <div>
+            <h3 className='mb-10 mt-4 font-mono'>
+              Select a car maker and a year of production to see the results
+            </h3>
+            <SelectVehicleForm makerOptions={makerOptions} yearOptions={years} />
+          </div>
         </div>
       </main>
       <footer className='border-t border-gray-200 bg-white px-4 py-2.5'>
