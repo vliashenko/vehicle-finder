@@ -1,9 +1,19 @@
 import Image from 'next/image';
-import mainLogo from '../../public/logo.png';
 import Link from 'next/link';
-import Select from '@/shared/ui/select';
 
-export default function Home() {
+import { VehicleApiService } from '@/services/vehicle';
+import SelectVehicleMaker from '@/features/vehicle/select-vehicle';
+
+import mainLogo from '../../public/logo.png';
+
+export default async function Home() {
+  const makers = await VehicleApiService.getVehicleMakers();
+
+  const buildedOptions = makers.map((maker) => ({
+    id: String(maker.MakeId),
+    title: maker.MakeName,
+  }));
+
   return (
     <div>
       <header>
@@ -36,15 +46,12 @@ export default function Home() {
           <p className='mb-5 text-center font-mono text-4xl font-semibold'>
             Find your ideal car effortlessly with our comprehensive app 🚗✨
           </p>
-          <div className='flex flex-row items-center gap-5'>
-            <Select />
-            <Select />
-          </div>
+          <SelectVehicleMaker options={buildedOptions} />
         </div>
       </main>
       <footer className='border-t border-gray-200 bg-white px-4 py-2.5'>
         <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-center'>
-          <Link href='/' className='flex items-center'>
+          <Link href='https://github.com/vliashenko' className='flex items-center'>
             <p className='self-center whitespace-nowrap font-mono text-sm text-gray-700'>
               @vliashenko
             </p>
