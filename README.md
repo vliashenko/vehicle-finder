@@ -61,5 +61,9 @@ src
 
 ```
 
+### usecases
+![image](https://github.com/user-attachments/assets/a9842da4-7e4b-4040-8115-3dd41b68590e)
+
+
 
 
