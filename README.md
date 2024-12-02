@@ -14,23 +14,52 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Additional commands:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+run prettier format: ```npm run format```,
+run eslint and prettier checks: ```npm run lint```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Vehicle Finder app Overview
+![image](https://github.com/user-attachments/assets/0953f10a-c484-4cf2-86e3-5e085440ce62)
 
-## Learn More
+To use the application, the user needs to select a model of the vehicle and the year of its production. After choosing the model and year the user is allowed to Search for the results.
 
-To learn more about Next.js, take a look at the following resources:
+![image](https://github.com/user-attachments/assets/cf26ac8a-5897-44e8-8bc0-ceb00f8286f3)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The result page contains detailed information about vehicles produced under the selected year and model.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+https://github.com/user-attachments/assets/de2aa37b-b759-4e8c-b11f-fb842885c4e9
 
-## Deploy on Vercel
+## Architecture Overview
+For this project, I have used the following architecture:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src
+├── app                               //Entry points into screens, routing. Composition of features modules, to which all work is delegated. These are smart components and page services
+|    └── page.tsx
+|    └── layout.ts
+|    └── [makeId]
+|           └── [year]
+|                  └── page.tsx       
+|                  └── layout.tsx
+├── entities                          //Contains only interfaces and types that are related to a certain entity
+│   └── models
+│       └── vehicle
+│           └── types.ts              
+├── features                          //One feature = one use-case, the layer where all business logic is held
+│   └── vehicle
+│       └── select-vehicle.tsx
+├── services                          //Data layer, state, calculations, logic. Services can be different at different levels, but their main task is to work with data, they do not know about ui at all
+│   └── vehicle
+│       ├── index.ts
+│       └── vehicle-service-api.ts
+├── shared                           //Shared code that has no domain knowledge. External libraries, design system, utilities. Easily portable to another project
+│   └── ui
+│       ├── button.tsx
+│       ├── loading.tsx
+│       └── select.tsx       
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+
+
+
